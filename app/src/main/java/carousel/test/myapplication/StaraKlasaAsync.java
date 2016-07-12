@@ -74,26 +74,16 @@ public class StaraKlasaAsync extends Activity implements View.OnTouchListener {
                 final int evX = (int) ev.getX();
                 final int evY = (int) ev.getY();
 
-                final View view = v;
-
-
-//                new Thread(new Runnable() {
-//                    public void run() {
-//                        //Do whatever
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//
-////stuff that updates ui
-//                                fillPaintMethod(evX, evY, v);
-//                            }
-//                        });
-//
-//                    }
-//                }).start();
+                if (v.getId() == paletteImageView.getId()) {
+                    changeToColor = getHotspotColor(R.id.palette, evX, evY);
+                    showColorImageView.setBackgroundColor(changeToColor);
+                    Log.v("test", "we hit palette color " + changeToColor);
+                    if (changeToColor == Color.WHITE || changeToColor == Color.BLACK) {
+                        changeToColor = 0; // click outside the color circles
+                    }
+                }
 
                 new AsyncPaint(evX, evY, v).execute(v);
-
 
                 break;
 
@@ -139,132 +129,7 @@ public class StaraKlasaAsync extends Activity implements View.OnTouchListener {
             layerWithColorId = R.id.layer1;
         }
 
-//        ColorTool ct = new ColorTool();
-//        int tolerance = 0;
-//
-//        if (ct.closeMatch(colorLayerMap.get(R.id.layer10), touchColor, tolerance) && isColorOnThisLayer(R.id.layer10)) {
-//
-//            ImageView imageView10 = (ImageView) findViewById(R.id.layer10);
-//            Bitmap bitmap = ((BitmapDrawable) imageView10.getDrawable()).getBitmap();
-//
-//            if (changeToColor != 0) {
-//                imageView10.setImageBitmap(changeToColor(bitmap, touchColor, R.id.layer10));
-//            } else {
-//                imageView10.setImageBitmap(bitmap);
-//            }
-//
-//            imageView10.setVisibility(View.VISIBLE);
-//        } else if (ct.closeMatch(colorLayerMap.get(R.id.layer9), touchColor, tolerance) && isColorOnThisLayer(R.id.layer9)) {
-//
-//            ImageView imageView9 = (ImageView) findViewById(R.id.layer9);
-//            Bitmap bitmap = ((BitmapDrawable) imageView9.getDrawable()).getBitmap();
-//
-//            if (changeToColor != 0) {
-//                imageView9.setImageBitmap(changeToColor(bitmap, touchColor, R.id.layer9));
-//            } else {
-//                imageView9.setImageBitmap(bitmap);
-//            }
-//            imageView9.setVisibility(View.VISIBLE);
-//
-//        } else if (ct.closeMatch(colorLayerMap.get(R.id.layer8), touchColor, tolerance) && isColorOnThisLayer(R.id.layer8)) {
-//
-//            ImageView imageView8 = (ImageView) findViewById(R.id.layer8);
-//            Bitmap bitmap = ((BitmapDrawable) imageView8.getDrawable()).getBitmap();
-//
-//            if (changeToColor != 0) {
-//                imageView8.setImageBitmap(changeToColor(bitmap, touchColor, R.id.layer8));
-//            } else {
-//                imageView8.setImageBitmap(bitmap);
-//            }
-//            imageView8.setVisibility(View.VISIBLE);
-//
-//        } else if (ct.closeMatch(colorLayerMap.get(R.id.layer7), touchColor, tolerance) && isColorOnThisLayer(R.id.layer7)) {
-//
-//            ImageView imageView7 = (ImageView) findViewById(R.id.layer7);
-//            Bitmap bitmap = ((BitmapDrawable) imageView7.getDrawable()).getBitmap();
-//
-//            if (changeToColor != 0) {
-//                imageView7.setImageBitmap(changeToColor(bitmap, touchColor, R.id.layer7));
-//            } else {
-//                imageView7.setImageBitmap(bitmap);
-//            }
-//            imageView7.setVisibility(View.VISIBLE);
-//
-//        } else if (ct.closeMatch(colorLayerMap.get(R.id.layer6), touchColor, tolerance) && isColorOnThisLayer(R.id.layer6)) {
-//
-//            ImageView imageView6 = (ImageView) findViewById(R.id.layer6);
-//            Bitmap bitmap = ((BitmapDrawable) imageView6.getDrawable()).getBitmap();
-//
-//            if (changeToColor != 0) {
-//                imageView6.setImageBitmap(changeToColor(bitmap, touchColor, R.id.layer6));
-//            } else {
-//                imageView6.setImageBitmap(bitmap);
-//            }
-//            imageView6.setVisibility(View.VISIBLE);
-//
-//        } else if (ct.closeMatch(colorLayerMap.get(R.id.layer5), touchColor, tolerance) && isColorOnThisLayer(R.id.layer5)) {
-//
-//            ImageView imageView5 = (ImageView) findViewById(R.id.layer5);
-//            Bitmap bitmap = ((BitmapDrawable) imageView5.getDrawable()).getBitmap();
-//
-//            if (changeToColor != 0) {
-//                imageView5.setImageBitmap(changeToColor(bitmap, touchColor, R.id.layer5));
-//            } else {
-//                imageView5.setImageBitmap(bitmap);
-//            }
-//            imageView5.setVisibility(View.VISIBLE);
-//
-//        } else if (ct.closeMatch(colorLayerMap.get(R.id.layer4), touchColor, tolerance) && isColorOnThisLayer(R.id.layer4)) {
-//
-//            ImageView imageView4 = (ImageView) findViewById(R.id.layer4);
-//            Bitmap bitmap = ((BitmapDrawable) imageView4.getDrawable()).getBitmap();
-//
-//            if (changeToColor != 0) {
-//                imageView4.setImageBitmap(changeToColor(bitmap, touchColor, R.id.layer4));
-//            } else {
-//                imageView4.setImageBitmap(bitmap);
-//            }
-//            imageView4.setVisibility(View.VISIBLE);
-//
-//        } else
-//        if (ct.closeMatch(colorLayerMap.get(R.id.layer3), touchColor, tolerance) && isColorOnThisLayer(R.id.layer3)) {
-//
-//            ImageView imageView3 = (ImageView) findViewById(R.id.layer3);
-//            Bitmap bitmap = ((BitmapDrawable) imageView3.getDrawable()).getBitmap();
-//
-//            if (changeToColor != 0) {
-//                imageView3.setImageBitmap(changeToColor(bitmap, touchColor, R.id.layer3));
-//            } else {
-//                imageView3.setImageBitmap(bitmap);
-//            }
-//            imageView3.setVisibility(View.VISIBLE);
-//
-//        } else if (ct.closeMatch(colorLayerMap.get(R.id.layer2), touchColor, tolerance) && isColorOnThisLayer(R.id.layer2)) {
-//
-//            ImageView imageView2 = (ImageView) findViewById(R.id.layer2);
-//            Bitmap bitmap = ((BitmapDrawable) imageView2.getDrawable()).getBitmap();
-//
-//            if (changeToColor != 0) {
-//                imageView2.setImageBitmap(changeToColor(bitmap, touchColor, R.id.layer2));
-//            } else {
-//                imageView2.setImageBitmap(bitmap);
-//            }
-//            imageView2.setVisibility(View.VISIBLE);
-//
-//        } else if (ct.closeMatch(colorLayerMap.get(R.id.layer1), touchColor, tolerance) && isColorOnThisLayer(R.id.layer1)) {
-//
-////            ImageView imageView1 = (ImageView) findViewById(R.id.layer1);
-////            Bitmap bitmap = ((BitmapDrawable) imageView1.getDrawable()).getBitmap();
-//
-////            if (changeToColor != 0) {
-////                imageView1.setImageBitmap(changeToColor(bitmap, touchColor, R.id.layer1));
-////            } else {
-////                imageView1.setImageBitmap(bitmap);
-////            }
-////            imageView1.setVisibility(View.VISIBLE);
-//        } else {
-//            Log.d("ImageAreasActivity", "white color hit");
-//        }
+
         return null;
     }
 
@@ -288,14 +153,6 @@ public class StaraKlasaAsync extends Activity implements View.OnTouchListener {
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            if (v.getId() == paletteImageView.getId()) {
-                changeToColor = getHotspotColor(R.id.palette, xX, yY);
-                showColorImageView.setBackgroundColor(changeToColor);
-                Log.v("test", "we hit palette color " + changeToColor);
-                if (changeToColor == Color.WHITE || changeToColor == Color.BLACK) {
-                    changeToColor = 0; // click outside the color circles
-                }
-            }
             ColorTool ct = new ColorTool();
             int tolerance = 0;
             if (colorLayerMap.containsKey(layerWithColorId)){
