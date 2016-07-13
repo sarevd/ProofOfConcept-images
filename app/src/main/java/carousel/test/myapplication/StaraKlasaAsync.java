@@ -81,9 +81,7 @@ public class StaraKlasaAsync extends Activity implements View.OnTouchListener {
                     if (changeToColor == Color.WHITE || changeToColor == Color.BLACK) {
                         changeToColor = 0; // click outside the color circles
                     }
-                }
-
-                new AsyncPaint(evX, evY, v).execute(v);
+                } else new AsyncPaint(evX, evY, v).execute(v);
 
                 break;
 
@@ -155,7 +153,7 @@ public class StaraKlasaAsync extends Activity implements View.OnTouchListener {
         protected void onPostExecute(Bitmap bitmap) {
             ColorTool ct = new ColorTool();
             int tolerance = 0;
-            if (colorLayerMap.containsKey(layerWithColorId)){
+            if (colorLayerMap.containsKey(layerWithColorId)) {
                 if (ct.closeMatch(colorLayerMap.get(layerWithColorId), touchColor, tolerance) && isColorOnThisLayer(layerWithColorId)) {
                     imageView = (ImageView) findViewById(layerWithColorId);
                     bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
@@ -166,9 +164,10 @@ public class StaraKlasaAsync extends Activity implements View.OnTouchListener {
                     }
                     imageView.setVisibility(View.VISIBLE);
 
-                }else {
+                } else {
                     Log.d("ImageAreasActivity", "white color hit");
-                }           }
+                }
+            }
         }
     }
 
