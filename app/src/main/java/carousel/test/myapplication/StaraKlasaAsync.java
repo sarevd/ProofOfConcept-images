@@ -1,7 +1,6 @@
 package carousel.test.myapplication;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,7 +12,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * This activity displays an image on the screen.
@@ -31,6 +32,7 @@ public class StaraKlasaAsync extends Activity implements View.OnTouchListener {
     private int layerWithColorId = -1;
     private ImageView showColorImageView;
     private int touchColor;
+    private Bitmap changedColorBitmap;
 
     /**
      * Create the view for the activity.
@@ -44,20 +46,55 @@ public class StaraKlasaAsync extends Activity implements View.OnTouchListener {
         colorLayerMap.put(R.id.layer1, Color.YELLOW);
         colorLayerMap.put(R.id.layer2, Color.RED);
         colorLayerMap.put(R.id.layer3, Color.BLUE);
-        colorLayerMap.put(R.id.layer4, Color.YELLOW);
-        colorLayerMap.put(R.id.layer5, Color.RED);
-        colorLayerMap.put(R.id.layer6, Color.BLUE);
-        colorLayerMap.put(R.id.layer7, Color.YELLOW);
-        colorLayerMap.put(R.id.layer8, Color.RED);
-        colorLayerMap.put(R.id.layer9, Color.BLUE);
-        colorLayerMap.put(R.id.layer10, Color.BLUE);
+//        colorLayerMap.put(R.id.layer4, Color.YELLOW);
+//        colorLayerMap.put(R.id.layer5, Color.RED);
+//        colorLayerMap.put(R.id.layer6, Color.BLUE);
+//        colorLayerMap.put(R.id.layer7, Color.YELLOW);
+//        colorLayerMap.put(R.id.layer8, Color.RED);
+//        colorLayerMap.put(R.id.layer9, Color.BLUE);
+//        colorLayerMap.put(R.id.layer10, Color.BLUE);
+
+        List<String> colorsList = new ArrayList<>();
+        colorsList.add("#f7941d");
+        colorsList.add("#ee1c25");
+        colorsList.add("#f7adce");
+        colorsList.add("#57585a");
+        colorsList.add("#a5a8ad");
+        colorsList.add("#ffffff");
+//        colorsList.add("#92278f");
+//        colorsList.add("#0072bb");
+//        colorsList.add("#00a650");
+//        colorsList.add("#e29966");
+//        colorsList.add("#fef200");
 
         relativeLayout = (RelativeLayout) findViewById(R.id.relative);
         relativeLayout.setOnTouchListener(this);
         paletteImageView = (ImageView) findViewById(R.id.palette);
         paletteImageView.setOnTouchListener(this);
         showColorImageView = (ImageView) findViewById(R.id.showcolor);
+
+        //  AsyncPaint(evX, evY, v).execute(v);
+
+            ImageView image = (ImageView) findViewById(R.id.layer1);
+            Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+
+        for (int i = 0; i < colorsList.size(); i++){
+            changedColorBitmap = null;
+            ImageView imageView = new ImageView(this);
+            imageView.setId(View.generateViewId());
+            //colorsList.get(i);
+
+            imageView.setImageBitmap(changeToColor(bitmap, Color.parseColor(colorsList.get(i)), imageView.getId()));
+            layerWithColorId = imageView.getId();
+
+            relativeLayout.addView(imageView);
+            colorLayerMap.put(layerWithColorId, Color.parseColor(colorsList.get(i)));
+        }
+
+//        bitmap.recycle();
+
     }
+
 
     /**
      * Respond to the user touching the screen.
@@ -95,28 +132,29 @@ public class StaraKlasaAsync extends Activity implements View.OnTouchListener {
     private Bitmap fillPaintMethod(int evX, int evY) {
 
 
-        if (getHotspotColor(R.id.layer10, evX, evY) != 0) {
-            touchColor = getHotspotColor(R.id.layer10, evX, evY);
-            layerWithColorId = R.id.layer10;
-        } else if (getHotspotColor(R.id.layer9, evX, evY) != 0) {
-            touchColor = getHotspotColor(R.id.layer9, evX, evY);
-            layerWithColorId = R.id.layer9;
-        } else if (getHotspotColor(R.id.layer8, evX, evY) != 0) {
-            touchColor = getHotspotColor(R.id.layer8, evX, evY);
-            layerWithColorId = R.id.layer8;
-        } else if (getHotspotColor(R.id.layer7, evX, evY) != 0) {
-            touchColor = getHotspotColor(R.id.layer7, evX, evY);
-            layerWithColorId = R.id.layer7;
-        } else if (getHotspotColor(R.id.layer6, evX, evY) != 0) {
-            touchColor = getHotspotColor(R.id.layer6, evX, evY);
-            layerWithColorId = R.id.layer6;
-        } else if (getHotspotColor(R.id.layer5, evX, evY) != 0) {
-            touchColor = getHotspotColor(R.id.layer5, evX, evY);
-            layerWithColorId = R.id.layer5;
-        } else if (getHotspotColor(R.id.layer4, evX, evY) != 0) {
-            touchColor = getHotspotColor(R.id.layer4, evX, evY);
-            layerWithColorId = R.id.layer4;
-        } else if (getHotspotColor(R.id.layer3, evX, evY) != 0) {
+//        if (getHotspotColor(R.id.layer10, evX, evY) != 0) {
+//            touchColor = getHotspotColor(R.id.layer10, evX, evY);
+//            layerWithColorId = R.id.layer10;
+//        } else if (getHotspotColor(R.id.layer9, evX, evY) != 0) {
+//            touchColor = getHotspotColor(R.id.layer9, evX, evY);
+//            layerWithColorId = R.id.layer9;
+//        } else if (getHotspotColor(R.id.layer8, evX, evY) != 0) {
+//            touchColor = getHotspotColor(R.id.layer8, evX, evY);
+//            layerWithColorId = R.id.layer8;
+//        } else if (getHotspotColor(R.id.layer7, evX, evY) != 0) {
+//            touchColor = getHotspotColor(R.id.layer7, evX, evY);
+//            layerWithColorId = R.id.layer7;
+//        } else if (getHotspotColor(R.id.layer6, evX, evY) != 0) {
+//            touchColor = getHotspotColor(R.id.layer6, evX, evY);
+//            layerWithColorId = R.id.layer6;
+//        } else if (getHotspotColor(R.id.layer5, evX, evY) != 0) {
+//            touchColor = getHotspotColor(R.id.layer5, evX, evY);
+//            layerWithColorId = R.id.layer5;
+//        } else if (getHotspotColor(R.id.layer4, evX, evY) != 0) {
+//            touchColor = getHotspotColor(R.id.layer4, evX, evY);
+//            layerWithColorId = R.id.layer4;
+//        } else
+        if (getHotspotColor(R.id.layer3, evX, evY) != 0) {
             touchColor = getHotspotColor(R.id.layer3, evX, evY);
             layerWithColorId = R.id.layer3;
         } else if (getHotspotColor(R.id.layer2, evX, evY) != 0) {
@@ -188,13 +226,14 @@ public class StaraKlasaAsync extends Activity implements View.OnTouchListener {
             return 0;
         } else {
             img.setDrawingCacheEnabled(true);
-            Bitmap hotspots = Bitmap.createBitmap(img.getDrawingCache());
-            if (hotspots == null) {
+//            Bitmap hotspots = Bitmap.createBitmap(img.getDrawingCache());
+            if (img.getDrawingCache() == null) {
                 Log.d("ImageAreasActivity", "Hot spot bitmap was not created");
                 return 0;
             } else {
                 img.setDrawingCacheEnabled(false);
-                return hotspots.getPixel(x, y);
+                int retval = img.getDrawingCache().getPixel(x, y);
+                return retval;
             }
         }
     }
@@ -204,7 +243,7 @@ public class StaraKlasaAsync extends Activity implements View.OnTouchListener {
         int bmpWidth = sourceBitmap.getWidth() - 1;
         int bmpHeight = sourceBitmap.getHeight() - 1;
 
-        Bitmap resultBitmap = Bitmap.createBitmap(sourceBitmap.getWidth(), sourceBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        changedColorBitmap = Bitmap.createBitmap(sourceBitmap.getWidth(), sourceBitmap.getHeight(), Bitmap.Config.ARGB_8888);
 
         int[] allPixels = new int[sourceBitmap.getHeight() * sourceBitmap.getWidth()];
 
@@ -221,8 +260,8 @@ public class StaraKlasaAsync extends Activity implements View.OnTouchListener {
 
         colorLayerMap.put(resourceLayoutId, changeToColor);
 
-        resultBitmap.setPixels(allPixels, 0, bmpWidth, 0, 0, bmpWidth, bmpHeight);
-        return resultBitmap;
+        changedColorBitmap.setPixels(allPixels, 0, bmpWidth, 0, 0, bmpWidth, bmpHeight);
+        return changedColorBitmap;
     }
 
     private boolean isColorOnThisLayer(int layerId) {
