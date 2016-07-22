@@ -3,4 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="slika1">#f2f06a</color>
+    <color name="slika2">#faf4a7</color>
+    <color name="slika3">#21a6e4</color>
+    <color name="slika4">#334ad9</color>
+    <color name="slika5">#2aeaed</color>
+    <color name="slika6">#f89911</color>
+    <color name="slika7">#6f6f6f</color>
+    <color name="slika8">#ae3e07</color>
+    <color name="slika9">#f8da9f</color>
+    <color name="slika10">#f89dea</color>
+    <color name="slika11">#f0d707</color>
 </resources>
